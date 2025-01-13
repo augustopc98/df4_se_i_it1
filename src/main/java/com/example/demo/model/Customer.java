@@ -16,6 +16,9 @@ public class Customer {
         this.customerEmail = customerEmail;
     }
 
+    public Customer() {
+    }
+
     public Long getCustomerId() {
         return customerId;
     }
@@ -26,5 +29,11 @@ public class Customer {
 
     public String getCustomerEmail() {
         return customerEmail;
+    }
+
+    public void setCustomerAddress(String customerAddress) {
+    }
+
+    public void setCustomerEmail(String customerEmail) {
     }
 }

@@ -9,6 +9,7 @@ import java.util.List;
 @Entity
 public class CustomerOrder {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long customerId;
     private Date orderDate;
@@ -27,6 +28,9 @@ public class CustomerOrder {
         this.items = items;
     }
 
+    public CustomerOrder() {
+    }
+
     public void addOrderItem(OrderItem item) {
         this.items.add(item);
     }
@@ -34,6 +38,11 @@ public class CustomerOrder {
     public void removeOrderItem(OrderItem item) {
         this.items.remove(item);
     }
+
+    public List<OrderItem> getItems() {
+        return items;
+    }
+
 
     public BigDecimal calculateTotal() {
         return items.stream().map(OrderItem::getPrice).reduce(BigDecimal.ZERO, BigDecimal::add);
@@ -45,7 +54,7 @@ public class CustomerOrder {
         // Assume we subtract this discount from the first payment for simplicity
         if (!payments.isEmpty()) {
             Payment firstPayment = payments.get(0);
-            firstPayment.amount = firstPayment.amount.subtract(discountAmount);
+            firstPayment.setAmount(firstPayment.getAmount().subtract(discountAmount));
         }
     }
 
